@@ -8,11 +8,14 @@
             case 'create':
                 $name = $_POST['name'];
                 $email = $_POST['email'];
-                $id = create_user($name,$email);
-                echo "i id é: ".$id;
+                $id = createUser($name,$email);
                 if($id){
                     header('Location: ../views/index.php?user='.$id);
                 }
+                break;
+            case 'verifyEmail':
+                $email = $_POST['email'];
+                echo isValidEmail($email) ? "true" : "false";
                 break;
             case null:
                 throw new Exception("É necessário informar a action!");

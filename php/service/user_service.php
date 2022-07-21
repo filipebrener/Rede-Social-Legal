@@ -1,8 +1,8 @@
 <?php
     
-    function create_user($name, $email){
+    function createUser($name, $email){
         include('../database/connection.inc.php');
-        if(!isValidEmail($email)) throw new Exception("Email: [$email] não está disponível, tente outro!"); // passar isso para o JavaScript tanmbém
+        if(!isValidEmail($email)) throw new Exception("Email: [$email] não está disponível, tente outro!");
         $sql = "INSERT INTO Usuarios (Nome,Email,Pontos) values ('$name','$email',0);";
         $result = $conn->query($sql);
         $id = $conn->insert_id;
