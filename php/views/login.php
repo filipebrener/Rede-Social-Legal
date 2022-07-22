@@ -20,7 +20,7 @@
             <input id="email" type="email">
         </div>
         <button onclick="login()">Entrar</button>
-        <a href="./create_user.php">
+        <a href="./user/create.php">
             <button type="button">Criar nova conta</button>
         </a>
     </div>

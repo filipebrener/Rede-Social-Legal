@@ -24,7 +24,7 @@ function verify_email(email){
         return
     }
     let xhttp = new XMLHttpRequest()
-    xhttp.open('POST', '../controller/user_controller.php', true);
+    xhttp.open('POST', '../../controller/user_controller.php', true);
     xhttp.onload = (event) => {
         if(xhttp.status == 200){
             element.style.color = bool_color_map[xhttp.responseText]

@@ -10,7 +10,7 @@
                 $email = $_POST['email'];
                 $id = createUser($name,$email);
                 if($id){
-                    header('Location: ../views/index.php?user='.$id);
+                    header('Location: ../views/home/index.php?user='.$id);
                 }
                 break;
             case 'verifyEmail':
