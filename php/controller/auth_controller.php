@@ -10,7 +10,7 @@
             $email = $_POST['email'];
             $id = login($name,$email);
             if($id){
-                header('Location: ../views/index.php?user='.$id);
+                echo $id;
             }  
         }
 

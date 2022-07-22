@@ -13,11 +13,11 @@
         
     function authUser(){
         if(!$_GET['user']) {
-            header('Location: ../views/login.php');
+            header('Location: ../login.php');
             die();
         }
 
-        include('../database/connection.inc.php');
+        include('../../database/connection.inc.php');
         
         $id = $_GET['user'];
         $sql = "SELECT ID FROM Usuarios WHERE ID = $id;";
@@ -27,5 +27,6 @@
         if(!$id) {
             header('Location: ../views/login.php');
         }
+        return $id;
     }
 ?>
