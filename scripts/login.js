@@ -4,7 +4,7 @@ function login() {
     xhttp.open('POST', '../controller/auth_controller.php', true);
     xhttp.onload = (event) => {
         if(xhttp.status = 200){
-            window.location = `./index.php?user=${xhttp.responseText}`
+            window.location = `./home/index.php?user=${xhttp.responseText}`
         } else {
             console.error("Erro ao realisar login: ", xhttp.responseText)
         }

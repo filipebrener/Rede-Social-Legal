@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../../styles/form.css">
-    <script src="../../../scripts/create_user.js"></script>
+    <script src="../../../scripts/user/create.js"></script>
     <title>Criar Usuário</title>
 </head>
 <body>
