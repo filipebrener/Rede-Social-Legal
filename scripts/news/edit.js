@@ -1,31 +1,33 @@
-function create() {
+function edit(){
+    let current_image = document.getElementById("current_image").value
     let file_obj = document.getElementById('image').files[0]
     if(file_obj != undefined) {
+        delete_image(current_image)
         var form_data = new FormData();                  
         form_data.append('file', file_obj);
         var xhttp = new XMLHttpRequest();
         xhttp.open("POST", "../../service/image_importer.php", true);
         xhttp.onload = function(event) {
             if (xhttp.status == 200) {
-                let body = getBodyForm(this.responseText)
+                let body = getBodyWithId(this.responseText)
                 submmitEvent(body)
             } else {
-                console.error("Erro ao importar uma imagem!")
+                console.log("Erro ao importar uma imagem!")
             }
         }
         xhttp.send(form_data);
+    } else {
+        let body = getBodyWithId(current_image)
+        submmitEvent(body)
     }
 }
 
-function getBodyForm(filepath){
-    return JSON.stringify({
-        user_id : document.getElementById("user_id").value,
-        action : document.getElementById("action").value,
-        title : document.getElementById("title").value,
-        text : document.getElementById("text").value,
-        image : filepath
-    })
+function getBodyWithId(image){
+    let body = JSON.parse(getBodyForm(image))
+    body['id'] = document.getElementById("id").value
+    return JSON.stringify(body)
 }
+
 
 function submmitEvent(body){
     var xhttp = new XMLHttpRequest();
@@ -36,7 +38,7 @@ function submmitEvent(body){
         if (xhttp.status == 200) {
             window.location = `./show.php?user=${JSON.parse(body).user_id}&news_id=${this.responseText}`
         } else {
-            console.error("Erro ao criar um evento!!")        
+            console.error("Erro ao editar um evento!!")        
             delete_image(JSON.parse(body).image)
         }
     }
@@ -54,4 +56,13 @@ function delete_image(filepath){
         }
     }
     xhttp.send()
+}
+
+function getBodyForm(filepath){
+    return JSON.stringify({
+        action : document.getElementById("action").value,
+        title : document.getElementById("title").value,
+        text : document.getElementById("text").value,
+        image : filepath
+    })
 }

@@ -1,23 +1,28 @@
 <?php
 
-    include('../service/image_importer_service.php');  
     include('../service/news_service.php');  
 
     try {
+        
         $inputJSON = file_get_contents('php://input');
         $input = json_decode($inputJSON, TRUE); //convert JSON into array
-        $action = $_POST['action'];
+
+        $action = $input['action'];
+        $title = $input['title'];
+        $text = $input['text'];
+        $image = $input['image'];
         switch ($action) {
             case 'create':
-                $title = $_POST['title'];
-                $text = $_POST['text'];
-                $user_id = $_POST['user_id'];
-                print_r($_FILES);
-                $image = save_image($_FILES);
-                $id = save_news($title, $text, $image, $user_id);
+                $user_id = $input['user_id'];
+                $id = create_news($title, $text, $image, $user_id);
                 if($id){
-                    header('Location: ../views/news/show.php?user='.$id);
+                    echo $id;
                 }
+                break;
+            case 'edit':
+                echo "entrei aqui para editar";
+                $news_id = $input['id'];
+                edit_news($title, $text, $image, $news_id)
                 break;
             case null:
                 throw new Exception("É necessário informar a action!");
