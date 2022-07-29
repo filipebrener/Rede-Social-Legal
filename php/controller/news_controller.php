@@ -9,11 +9,11 @@
 
         $action = $input['action'];
         switch ($action) {
-            $title = $input['title'];
-            $text = $input['text'];
-            $user_id = $input['user_id'];
-            $image = $input['image'];
             case 'create':
+                $title = $input['title'];
+                $text = $input['text'];
+                $user_id = $input['user_id'];
+                $image = $input['image'];
                 $id = create_news($title, $text, $image, $user_id);
                 if($id){
                     echo $id;
