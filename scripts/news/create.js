@@ -36,9 +36,22 @@ function submmitEvent(body){
             if (xhttp.status == 200) {
             window.location = `./show.php?user=${body.user_id}`
         } else {
-            console.error("Erro ao salvar um evento!")            
-            // delete_image(body.banner)
+            console.error("Erro ao criar um evento!!")            
+            delete_image(body.image)
         }
     }
     xhttp.send(body);
+}
+
+function delete_image(filepath){
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", `../service/image_importer.php?action=delete&filepath=${filepath}`, true);
+    xhttp.onload = function(event){
+        if(xhttp.status == 200){
+            console.log(`${filepath} apagado com sucesso!`)
+        } else {
+            console.log(`Erro ao apagar ${filepath}`)
+        }
+    }
+    xhttp.send()
 }

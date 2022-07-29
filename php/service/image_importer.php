@@ -1,5 +1,13 @@
 <?php
 
+    $action = $_GET['action'];
+
+    if($action == 'delete'){
+        $filepath = $_GET['filepath'];
+        unlink($filepath);
+        die;
+    }
+
     $arr_file_types = ['image/png', 'image/jpg', 'image/jpeg'];
         
     if (!(in_array($_FILES['file']['type'], $arr_file_types))) {
