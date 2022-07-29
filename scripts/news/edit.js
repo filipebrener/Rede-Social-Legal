@@ -24,10 +24,9 @@ function edit(){
 
 function getBodyWithId(image){
     let body = JSON.parse(getBodyForm(image))
-    body['id'] = document.getElementById("id").value
+    body['news_id'] = document.getElementById("id").value
     return JSON.stringify(body)
 }
-
 
 function submmitEvent(body){
     var xhttp = new XMLHttpRequest();
@@ -36,10 +35,9 @@ function submmitEvent(body){
     xhttp.setRequestHeader("Content-Type", "application/json");
     xhttp.onload = function(event) {
         if (xhttp.status == 200) {
-            window.location = `./show.php?user=${JSON.parse(body).user_id}&news_id=${this.responseText}`
+            window.location = `./show.php?user=${JSON.parse(body).user_id}&news_id=${JSON.parse(body).news_id}`
         } else {
             console.error("Erro ao editar um evento!!")        
-            delete_image(JSON.parse(body).image)
         }
     }
     xhttp.send(body);
@@ -63,6 +61,7 @@ function getBodyForm(filepath){
         action : document.getElementById("action").value,
         title : document.getElementById("title").value,
         text : document.getElementById("text").value,
+        user_id: document.getElementById("user_id").value,
         image : filepath
     })
 }

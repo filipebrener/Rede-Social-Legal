@@ -16,7 +16,6 @@
                 Texto = '$text',
                 Imagem = '$image'
                 WHERE ID = $news_id";
-        echo $sql;
         $conn->query($sql);
         $conn->close();
     }

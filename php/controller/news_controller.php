@@ -19,6 +19,13 @@
                     echo $id;
                 }
                 break;
+            case 'edit': 
+                $title = $input['title'];
+                $text = $input['text'];
+                $news_id = $input['news_id'];
+                $image = $input['image'];
+                $id = edit_news($title, $text, $image, $news_id);
+                break;
             case null:
                 throw new Exception("É necessário informar a action!");
                 break;
