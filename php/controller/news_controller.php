@@ -8,21 +8,16 @@
         $input = json_decode($inputJSON, TRUE); //convert JSON into array
 
         $action = $input['action'];
-        $title = $input['title'];
-        $text = $input['text'];
-        $image = $input['image'];
         switch ($action) {
+            $title = $input['title'];
+            $text = $input['text'];
+            $user_id = $input['user_id'];
+            $image = $input['image'];
             case 'create':
-                $user_id = $input['user_id'];
                 $id = create_news($title, $text, $image, $user_id);
                 if($id){
                     echo $id;
                 }
-                break;
-            case 'edit':
-                echo "entrei aqui para editar";
-                $news_id = $input['id'];
-                edit_news($title, $text, $image, $news_id)
                 break;
             case null:
                 throw new Exception("É necessário informar a action!");
