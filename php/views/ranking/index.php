@@ -44,7 +44,7 @@ $proximo = $pag + 1;
     <input type="hidden" id="screen" value="ranking">
     <?php include('../utils/header.php') ?>
     <h1>Ranking</h1>
-    <table class="table table-striped table-hover table-md" border="1" width="30$">
+    <table class="table table-striped table-hover table-md" border="1" width="30%">
         <thead>
             <tr>
                 <th scope="col">POSIÇÃO</th>
