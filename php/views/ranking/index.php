@@ -1,7 +1,7 @@
 <?php
 include('../../database/connection.inc.php');
 include('../../service/auth_service.php');
-// $current_user = authUser();  // < -- só comentar essa linha pra poder entrar na tela sem precisar de logar
+$current_user = authUser();  // < -- só comentar essa linha pra poder entrar na tela sem precisar de logar
 // porém a navegação da página vai ficar comprometida (lembrar de descomentar antes de enviar o trabalho)
 
 $pag = (isset($_GET['pagina'])) ? $_GET['pagina'] : 1;
