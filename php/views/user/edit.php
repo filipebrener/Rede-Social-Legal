@@ -40,7 +40,7 @@ if (!empty($_GET['user'])) {
         <div class="form-line">
             <label for="name">Nome</label>
             <input required name="name" type="text" value="<?php echo $nome; ?>">
-        </div>
+        </div><br>
         <div class="form-line">
             <label for="email">E-mail</label>
             <input required onchange="verify_email(this.value)" name="email" type="email" id="email_input" value="<?php echo $email; ?>">

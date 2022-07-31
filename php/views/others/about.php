@@ -15,10 +15,12 @@
 <body>
     <input type="hidden" id="screen" value="about">
     <?php include('../utils/header.php') ?>
+    <h1>Projeto desenvolvido por:</h1>
     <ul>
-        <li>Filipe Brener Ferreira Santos: 5052</li>
-        <li>Rodolfo Brizzi Junior : 6025</li>
-        <li>Caio Augusto Santos Ribeiro : 6018</li>
+        <li>5952: Filipe Brener Ferreira Santos</li>
+        <li>6018: Caio Augusto Santos Ribeiro</li>
+        <li>6025: Rodolfo Brizzi Junior</li>
+
     </ul>
 </body>
 </html>
