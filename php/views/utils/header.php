@@ -26,5 +26,6 @@
     </div>
     <a id="my_profile" href="../user/show.php?user=<?php echo $current_user;?>">Meu perfil</a>
     <a id="about" href="../others/about.php?user=<?php echo $current_user;?>">Sobre</a>
+    <a id="logout" href="../login.php">Sair</a>
   </div>
 </div>
