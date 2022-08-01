@@ -1,29 +1,35 @@
 <?php
-include('../../database/connection.inc.php');
-include('../../service/auth_service.php');
-$current_user = authUser();  // < -- só comentar essa linha pra poder entrar na tela sem precisar de logar
-// porém a navegação da página vai ficar comprometida (lembrar de descomentar antes de enviar o trabalho)
-if (!empty($_GET['user'])) {
-    $id = $_GET['user'];
+try {
+    //code...
+    include('../../database/connection.inc.php');
+    include('../../service/auth_service.php');
+    $current_user = authUser();  // < -- só comentar essa linha pra poder entrar na tela sem precisar de logar
+    // porém a navegação da página vai ficar comprometida (lembrar de descomentar antes de enviar o trabalho)
+    if (!empty($_GET['user'])) {
+        $id = $_GET['user'];
+    }
+    
+    $pag = (isset($_GET['pagina'])) ? $_GET['pagina'] : 1;
+    
+    $busca = "SELECT *FROM Usuarios ORDER BY pontos DESC";
+    $todos = mysqli_query($conn, "$busca");
+    
+    $registros = "1";
+    
+    $tr = mysqli_num_rows($todos);
+    $tp = ceil($tr / $registros);
+    
+    $inicio = ($registros * $pag) - $registros;
+    $limite = mysqli_query($conn, "$busca LIMIT $inicio, $registros");
+    
+    $anterior = $pag - 1;
+    $proximo = $pag + 1;
+    
+} catch (Exception $e) {
+    http_response_code(500);
+    echo 'Exceção capturada: ',  $e->getMessage(), "\n";
 }
-
-$pag = (isset($_GET['pagina'])) ? $_GET['pagina'] : 1;
-
-$busca = "SELECT *FROM usuarios ORDER BY pontos DESC";
-$todos = mysqli_query($conn, "$busca");
-
-$registros = "1";
-
-$tr = mysqli_num_rows($todos);
-$tp = ceil($tr / $registros);
-
-$inicio = ($registros * $pag) - $registros;
-$limite = mysqli_query($conn, "$busca LIMIT $inicio, $registros");
-
-$anterior = $pag - 1;
-$proximo = $pag + 1;
-
-
+    
 ?>
 
 

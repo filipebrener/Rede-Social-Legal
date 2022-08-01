@@ -4,7 +4,9 @@ include('../../service/auth_service.php');
 $current_user = authUser();  // < -- só comentar essa linha pra poder entrar na tela sem precisar de logar
 // porém a navegação da página vai ficar comprometida (lembrar de descomentar antes de enviar o trabalho)
 
-$sql = "SELECT * FROM noticias ORDER BY id ASC";
+$sql = "SELECT  n.Imagem, n.Titulo, n.Texto, u.Nome, u.Pontos, n.ID
+FROM Noticias n
+INNER JOIN Usuarios u ON n.ID_Usuario = u.ID";
 $result = $conn->query($sql);
 ?>
 
@@ -22,12 +24,12 @@ $result = $conn->query($sql);
     <input type="hidden" id="screen" value="news_report">
     <?php include('../utils/header.php') ?>
 
-    <h2>OBS: Decidir o que vai ser colocado no relatório</h2>
     <h1>Relatório de Notícias</h1>
     <table border="1" width="30%">
         <thead>
             <tr>
             <th scope="col">TÍTULO</th>
+            <th scope="col">AUTOR</th>
             </tr>
         </thead>
         <Tbody>
@@ -35,6 +37,7 @@ $result = $conn->query($sql);
                 while($user_data = mysqli_fetch_assoc($result)){
                     echo "<tr>";
                     echo "<td>".$user_data['Titulo']."</td>";
+                    echo "<td>".$user_data['Nome']."</td>";
                     echo "</tr>";
                 }
             ?>

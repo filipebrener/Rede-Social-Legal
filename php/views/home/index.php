@@ -1,31 +1,31 @@
 <?php
-include('../../database/connection.inc.php');
-include('../../service/auth_service.php');
-$current_user = authUser(); // < -- só comentar essa linha pra poder entrar na tela sem precisar de logar
-// porém a navegação da página vai ficar comprometida (lembrar de descomentar antes de enviar o trabalho)
+    include('../../database/connection.inc.php');
+    include('../../service/auth_service.php');
+    $current_user = authUser(); // < -- só comentar essa linha pra poder entrar na tela sem precisar de logar
+    // porém a navegação da página vai ficar comprometida (lembrar de descomentar antes de enviar o trabalho)
+    
+    if (!empty($_GET['user'])) {
+        $id = $_GET['user'];
+    }
+    
+    $pag = (isset($_GET['pagina'])) ? $_GET['pagina'] : 1;
+    
+    $busca = "SELECT  n.Imagem, n.Titulo, n.Texto, u.Nome, u.Pontos, n.ID
+    FROM Noticias n
+    INNER JOIN Usuarios u ON n.ID_Usuario = u.ID
+    ORDER BY n.ID DESC";
+    $todos = mysqli_query($conn, "$busca");
 
-if (!empty($_GET['user'])) {
-    $id = $_GET['user'];
-}
+    $registros = "1";
 
-$pag = (isset($_GET['pagina'])) ? $_GET['pagina'] : 1;
+    $tr = mysqli_num_rows($todos);
+    $tp = ceil($tr / $registros);
 
-$busca = "SELECT  n.Imagem, n.Titulo, n.Texto, u.Nome, u.Pontos, n.ID
-FROM noticias n
-INNER JOIN usuarios u ON n.ID_Usuario = u.ID
-ORDER BY n.ID DESC";
-$todos = mysqli_query($conn, "$busca");
+    $inicio = ($registros * $pag) - $registros;
+    $limite = mysqli_query($conn, "$busca LIMIT $inicio, $registros");
 
-$registros = "1";
-
-$tr = mysqli_num_rows($todos);
-$tp = ceil($tr / $registros);
-
-$inicio = ($registros * $pag) - $registros;
-$limite = mysqli_query($conn, "$busca LIMIT $inicio, $registros");
-
-$anterior = $pag - 1;
-$proximo = $pag + 1;
+    $anterior = $pag - 1;
+    $proximo = $pag + 1;
 
 ?>
 
@@ -68,7 +68,7 @@ $proximo = $pag + 1;
                 $pontos = $dados['Pontos'];
             ?>
                 <tr>
-                    <th scope="row"><?= $imagem ?></th>
+                    <th scope="row"> <img style="max-width: 700px; max-heigth: 700px;"src="<?php echo $imagem ?>" alt="Imagem da notícia"> </th>
                     <th><?= $titulo ?></td>
                     <th><?= $texto ?></td>
                     <th><?= $nome_usuario?></td>

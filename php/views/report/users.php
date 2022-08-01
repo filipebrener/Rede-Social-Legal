@@ -4,7 +4,7 @@ include('../../service/auth_service.php');
 $current_user = authUser();  // < -- só comentar essa linha pra poder entrar na tela sem precisar de logar
 // porém a navegação da página vai ficar comprometida (lembrar de descomentar antes de enviar o trabalho)
 
-$sql = "SELECT nome, email FROM usuarios ORDER BY nome ASC";
+$sql = "SELECT nome, email, pontos FROM Usuarios ORDER BY nome ASC";
 $result = $conn->query($sql);
 
 ?>
@@ -28,6 +28,7 @@ $result = $conn->query($sql);
             <tr>
             <th scope="col">USUÁRIO</th>
             <th scope="col">EMAIL</th>
+            <th scope="col">PONTOS</th>
             </tr>
         </thead>
         <Tbody>
@@ -36,6 +37,7 @@ $result = $conn->query($sql);
                     echo "<tr>";
                     echo "<td>".$user_data['nome']."</td>";
                     echo "<td>".$user_data['email']."</td>";
+                    echo "<td>".$user_data['pontos']."</td>";
                     echo "</tr>";
                 }
             ?>

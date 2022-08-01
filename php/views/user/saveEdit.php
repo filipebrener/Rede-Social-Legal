@@ -6,7 +6,7 @@ if (isset($_POST['update'])) {
     $nome = $_POST['name'];
     $email = $_POST['email'];
 
-    $sqlUpdate = "UPDATE usuarios SET nome='$nome', email='$email' 
+    $sqlUpdate = "UPDATE Usuarios SET nome='$nome', email='$email' 
                     WHERE id=$id";
 
     $result = $conn->query($sqlUpdate);

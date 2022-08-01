@@ -5,7 +5,7 @@ include('../../service/auth_service.php');
 $current_user = authUser();  // < -- só comentar essa linha pra poder entrar na tela sem precisar de logar
 // porém a navegação da página vai ficar comprometida (lembrar de descomentar antes de enviar o trabalho)
 
-$sql = "SELECT * FROM `noticias` WHERE id_usuario = $current_user ORDER BY id ASC";
+$sql = "SELECT * FROM `Noticias` WHERE id_usuario = $current_user ORDER BY id ASC";
 $result = $conn->query($sql);
 
 ?>
@@ -35,6 +35,7 @@ $result = $conn->query($sql);
                 while($user_data = mysqli_fetch_assoc($result)){
                     echo "<tr>";
                     echo "<td>".$user_data['Titulo']."</td>";
+                    echo "<td><a href='./show.php?user=".$current_user."&news_id=".$user_data['ID']."'><button>Exibir</button></a> </td>";
                     echo "</tr>";
                 }
             ?>

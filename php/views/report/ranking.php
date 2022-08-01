@@ -4,7 +4,7 @@ include('../../service/auth_service.php');
 $current_user = authUser();  // < -- só comentar essa linha pra poder entrar na tela sem precisar de logar
 // porém a navegação da página vai ficar comprometida (lembrar de descomentar antes de enviar o trabalho)
 
-$sql = "SELECT * FROM usuarios ORDER BY Pontos DESC";
+$sql = "SELECT * FROM Usuarios ORDER BY Pontos DESC";
 $result = $conn->query($sql);
 
 ?>

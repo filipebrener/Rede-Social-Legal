@@ -8,7 +8,7 @@ if (!empty($_GET['user'])) {
 
     $id = $_GET['user'];
 
-    $sqlSelect = "SELECT nome, email, pontos FROM usuarios WHERE id=$id";
+    $sqlSelect = "SELECT nome, email, pontos FROM Usuarios WHERE id=$id";
     $result = $conn->query($sqlSelect);
 
     if ($result->num_rows > 0) {
