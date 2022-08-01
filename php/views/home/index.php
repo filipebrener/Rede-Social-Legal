@@ -16,7 +16,7 @@
     ORDER BY n.ID DESC";
     $todos = mysqli_query($conn, "$busca");
 
-    $registros = "1";
+    $registros = "10";
 
     $tr = mysqli_num_rows($todos);
     $tp = ceil($tr / $registros);
