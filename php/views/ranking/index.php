@@ -14,7 +14,7 @@ try {
     $busca = "SELECT *FROM Usuarios ORDER BY pontos DESC";
     $todos = mysqli_query($conn, "$busca");
     
-    $registros = "1";
+    $registros = "2";
     
     $tr = mysqli_num_rows($todos);
     $tp = ceil($tr / $registros);
@@ -41,11 +41,11 @@ try {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Ta bugando quando coloca o bootstrap -->
+    <script src="../../../styles/pagination.css"></script>
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-
+    <!-- déficit técnico: css do bootstrap deixa a barra de navegação bugada, esse css seria ultilizado na barra de paginação  -->
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script> -->
 
     <title>Ranking</title>
 </head>
@@ -64,39 +64,39 @@ try {
         </thead>
         <tbody>
             <?php
-            $lista = 0;
+            $lista = $pag;
+            $num_pag = ($lista * 2) - 1;
             while ($dados = mysqli_fetch_array($limite)) {
-                $lista++;
                 $id = $dados['ID'];
                 $nome = $dados['Nome'];
                 $pontos = $dados['Pontos'];
             ?>
                 <tr>
-                    <th scope="row"><?= $lista ?></th>
+                    <th scope="row"><?= $num_pag ?></th>
                     <th><?= $nome ?></td>
                     <th><?= $pontos ?></td>
                 </tr>
-            <?php } ?>
+            <?php 
+            $num_pag++;
+        } ?>
         </tbody>
     </table>
     <nav aria-label="Navegação de página exemplo">
-        <ul class="pagination">
             <?php
             if ($pag > 1) {
             ?>
-                <li class="page-item">
                     <a class="page-link" href="?user=<?= $current_user; ?>&pagina=<?= $anterior; ?>" aria-label="Anterior">
                         <span aria-hidden="true">Anterior</span>
                     </a>
-                </li>
             <?php } ?>
 
             <?php
             for ($i = 1; $i <= $tp; $i++) {
+                echo "&nbsp"; 
                 if ($pag == $i) {
-                    echo "<li class='page-item active'><a class='page-link' href='?user=$current_user&pagina=$i'>$i</a></li>";
+                    echo $i;
                 } else {
-                    echo "<li class='page-item'><a class='page-link' href='?user=$current_user&pagina=$i'>$i</a></li>";
+                    echo "<a class='page-link' href='?user=$current_user&pagina=$i'>$i</a>";
                 }
             }
             ?>
@@ -106,14 +106,10 @@ try {
             <?php
             if ($pag < $tp) {
             ?>
-                <li class="page-item">
                     <a class="page-link" href="?user=<?= $current_user; ?>&pagina=<?= $proximo; ?>" aria-label="Próximo">
                         <span aria-hidden="true">Próximo</span>
-
                     </a>
-                </li>
             <?php } ?>
-        </ul>
     </nav>
 
 </html>

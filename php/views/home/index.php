@@ -36,6 +36,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- déficit técnico: css do bootstrap deixa a barra de navegação bugada, esse css seria ultilizado na barra de paginação  -->
     <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script> -->
 
@@ -79,23 +80,21 @@
         </tbody>
     </table>
     <nav aria-label="Navegação de página exemplo">
-        <ul class="pagination">
             <?php
             if ($pag > 1) {
             ?>
-                <li class="page-item">
-                    <a class="page-link" href="?user=<?= $current_user; ?>&pagina=<?= $anterior; ?>" aria-label="Anterior">
-                        <span aria-hidden="true">Anterior</span>
-                    </a>
-                </li>
+                <a class="page-link" href="?user=<?= $current_user; ?>&pagina=<?= $anterior; ?>" aria-label="Anterior">
+                    <span aria-hidden="true">Anterior</span>
+                </a>
             <?php } ?>
 
             <?php
             for ($i = 1; $i <= $tp; $i++) {
+                echo "&nbsp"; 
                 if ($pag == $i) {
-                    echo "<li class='page-item active'><a class='page-link' href='?user=$current_user&pagina=$i'>$i</a></li>";
+                    echo $i;
                 } else {
-                    echo "<li class='page-item'><a class='page-link' href='?user=$current_user&pagina=$i'>$i</a></li>";
+                    echo "<a class='page-link' href='?user=$current_user&pagina=$i'>$i</a>";
                 }
             }
             ?>
@@ -105,14 +104,10 @@
             <?php
             if ($pag < $tp) {
             ?>
-                <li class="page-item">
-                    <a class="page-link" href="?user=<?= $current_user; ?>&pagina=<?= $proximo; ?>" aria-label="Próximo">
-                        <span aria-hidden="true">Próximo</span>
-
-                    </a>
-                </li>
+                <a class="page-link" href="?user=<?= $current_user; ?>&pagina=<?= $proximo; ?>" aria-label="Próximo">
+                    <span aria-hidden="true">Próximo</span>
+                </a>
             <?php } ?>
-        </ul>
     </nav>
 
 </html>
